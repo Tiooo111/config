@@ -4,47 +4,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
  
  
+let mapleader="\\"
 " 这里根据自己需要的插件来设置，以下是我的配置 "
 "
-" YouCompleteMe:语句补全插件
-" 寻找全局配置文件
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-" 禁用syntastic来对python检查
-let g:syntastic_ignore_files=[".*\.py$"] 
-" 使用ctags生成的tags文件
-let g:ycm_collect_identifiers_from_tag_files = 1
-" 开启语义补全
-" 修改对C语言的补全快捷键，默认是CTRL+space，修改为ALT+;未测出效果
-"let g:ycm_key_invoke_completion = '<M-;>'
-" 设置转到定义处的快捷键为ALT+G，未测出效果
-"nmap <M-g> :YcmCompleter GoToDefinitionElseDeclaration <C-R>=expand("<cword>")<CR><CR> 
-"关键字补全
-let g:ycm_seed_identifiers_with_syntax = 1
-" 在接受补全后不分裂出一个窗口显示接受的项
-set completeopt-=preview
-" 让补全行为与一般的IDE一致
-set completeopt=longest,menu
-" 不显示开启vim时检查ycm_extra_conf文件的信息
-let g:ycm_confirm_extra_conf=0
-" 每次重新生成匹配项，禁止缓存匹配项
-let g:ycm_cache_omnifunc=0
-" 在注释中也可以补全
-let g:ycm_complete_in_comments=1
-" 输入第一个字符就开始补全
-let g:ycm_min_num_of_chars_for_completion=1
-" 错误标识符
-let g:ycm_error_symbol='>>'
-" 警告标识符
-let g:ycm_warning_symbol='>*'
-" 不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
-" let g:ycm_use_ultisnips_completer=0
-"
-Bundle 'Valloric/YouCompleteMe'
 
 " github 仓库中的插件 "
 Plugin 'VundleVim/Vundle.vim'
  
- 3
 Plugin 'vim-airline/vim-airline'
 "vim-airline配置:优化vim界面"
 "let g:airline#extensions#tabline#enabled = 1
@@ -134,8 +100,8 @@ func SetTitle()
 		call append(line(".")+6, "#include<bits/stdc++.h>")
     	call append(line(".")+7, "using namespace std;")
 		call append(line(".")+8, "int main(){")
-		call append(line(".")+10, "		return 0;	")
-		call append(line(".")+11, "}")
+		call append(line(".")+9, "		return 0;	")
+		call append(line(".")+10, "}")
 	endif
 	if &filetype == 'c'
 		call append(line(".")+6, "#include<stdio.h>")
@@ -160,7 +126,7 @@ map! <C-A> <Esc>mlggVG
 map <F12> gg=G
 " 选中状态下 Ctrl+c 复制
 vmap <C-c> "+y
-nmap <leader>p :"+p  
+nmap <leader>p "+p  
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""实用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -198,7 +164,7 @@ set syntax=on
 " 去掉输入错误的提示声音
 set noeb
 " 在处理未保存或只读文件的时候，弹出确认
-set confirm
+"set confirm
 " 自动缩进
 set autoindent
 set cindent
@@ -223,6 +189,8 @@ set ignorecase
 "搜索逐字符高亮
 set hlsearch
 set incsearch
+"颜色
+colorscheme guardian2 
 "行内替换
 set gdefault
 "编码设置
