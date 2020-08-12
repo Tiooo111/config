@@ -1,16 +1,42 @@
 set nocompatible
 filetype on
+filetype plugin on
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
  
- 
+Plugin 'suan/vim-instant-markdown'
+map <F9> :InstantMarkdownPreview<CR>
+"By default, no TeX code embedded within markdown would be rendered. 
+"This option uses MathJax and launches the node server as instant-markdown-d --mathjax.
+let g:instant_markdown_mathjax = 1
 let mapleader="\\"
 " 这里根据自己需要的插件来设置，以下是我的配置 "
-"
-
 " github 仓库中的插件 "
+Plugin 'preservim/nerdcommenter'
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 Plugin 'VundleVim/Vundle.vim'
- 
 Plugin 'vim-airline/vim-airline'
 "vim-airline配置:优化vim界面"
 "let g:airline#extensions#tabline#enabled = 1
@@ -100,7 +126,7 @@ func SetTitle()
 		call append(line(".")+6, "#include<bits/stdc++.h>")
     	call append(line(".")+7, "using namespace std;")
 		call append(line(".")+8, "int main(){")
-		call append(line(".")+9, "		return 0;	")
+		call append(line(".")+9, "    return 0;	")
 		call append(line(".")+10, "}")
 	endif
 	if &filetype == 'c'
@@ -127,6 +153,11 @@ map <F12> gg=G
 " 选中状态下 Ctrl+c 复制
 vmap <C-c> "+y
 nmap <leader>p "+p  
+" tab
+nmap <tab> V>
+nmap <s-tab> V<
+vmap <tab> >gv
+vmap <s-tab> <gv
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""实用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -164,7 +195,7 @@ set syntax=on
 " 去掉输入错误的提示声音
 set noeb
 " 在处理未保存或只读文件的时候，弹出确认
-"set confirm
+set confirm
 " 自动缩进
 set autoindent
 set cindent
@@ -190,7 +221,7 @@ set ignorecase
 set hlsearch
 set incsearch
 "颜色
-colorscheme guardian2 
+colorscheme  code-dark
 "行内替换
 set gdefault
 "编码设置
@@ -228,6 +259,7 @@ set whichwrap+=<,>,h,l
 set mouse=a
 set selection=exclusive
 set selectmode=mouse,key
+set autochdir
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 set report=0
 " 在被分割的窗口间显示空白，便于阅读
@@ -261,3 +293,6 @@ endfunction
 filetype plugin indent on 
 "打开文件类型检测, 加了这句才可以用智能补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <F5>   <Esc>:w<CR>:!g++ -std=c++11 % -o ./a.out && ./a.out<CR>
+nnoremap <F7>   <Esc>:w<CR>:!g++ -std=c++11 %<CR>
+nnoremap <C-F5> <Esc>:w<CR>:!g++ -std=c++11 -g % -o ./a.out && gdb ./a.out<CR>
