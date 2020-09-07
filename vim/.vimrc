@@ -3,12 +3,20 @@ filetype on
 filetype plugin on
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
- 
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'fatih/vim-go'
+
 Plugin 'suan/vim-instant-markdown'
+let g:instant_markdown_autostart = 0
+"F4 prepare cpp"
+map <F4> :!prepare.sh %<CR> 
+"F9 MarkDown"
 map <F9> :InstantMarkdownPreview<CR>
+map <F8> :InstantMarkdownStop<CR>
 "By default, no TeX code embedded within markdown would be rendered. 
 "This option uses MathJax and launches the node server as instant-markdown-d --mathjax.
-let g:instant_markdown_mathjax = 1
+
 let mapleader="\\"
 " 这里根据自己需要的插件来设置，以下是我的配置 "
 " github 仓库中的插件 "
@@ -36,7 +44,6 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
-Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 "vim-airline配置:优化vim界面"
 "let g:airline#extensions#tabline#enabled = 1
